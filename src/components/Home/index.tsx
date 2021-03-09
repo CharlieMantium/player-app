@@ -1,33 +1,8 @@
 import React, { useState } from 'react';
-import styled from 'styled-components/macro';
-import { rem } from 'polished';
-
-import { colors } from '../../styles/base';
 
 import List from '../List';
-
-const Wrapper = styled.div``;
-
-const Header = styled.h1``;
-
-const ListChangeWrapper = styled.div`
-  display: flex;
-  justify-content: stretch;
-  margin: ${rem(10)} 0;
-`;
-
-const Button = styled.button`
-  margin: 0 ${rem(5)};
-  padding: ${rem(10)};
-  flex: 1;
-  border: ${rem(3)} solid ${colors.alpha};
-  border-radius: ${rem(5)};
-  background-color: ${colors.beta};
-`;
-
-interface HomeProps {
-  token: string;
-}
+import { Wrapper, Header, ListChangeWrapper, Button } from './home.styles';
+import { HomeProps } from './types';
 
 const Home: React.FC<HomeProps> = ({ token }) => {
   const [listNumber, setListNumber] = useState(2);

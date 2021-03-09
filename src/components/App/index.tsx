@@ -1,17 +1,9 @@
 import React, { useState } from 'react';
-import styled from 'styled-components/macro';
-import { rem } from 'polished';
 
+import { Wrapper } from './app.styles';
 import Home from '../Home';
 import Splash from '../Splash';
 import Error from '../Error';
-
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  padding: ${rem(20)};
-`;
 
 const App = () => {
   const [token, setToken] = useState('');

@@ -1,10 +1,6 @@
 import React from 'react';
-import styled from 'styled-components/macro';
 
-const Wrapper = styled.div`
-  display: flex;
-  justify-content: center;
-`;
+import { Wrapper } from './error.styles';
 
 const Error = () => {
   return (

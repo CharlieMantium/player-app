@@ -1,23 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import styled from 'styled-components/macro';
 
+import { getList } from '../../helpers/index';
 import ListItem from '../ListItem';
 import LoaderComponent from '../Loader';
 import Error from '../Error';
-
-const Wrapper = styled.div``;
-
-interface Movie {
-  Title: string;
-  Id: string;
-  Images: { ImageTypeCode: string; Url: string }[];
-}
-
-interface ListProps {
-  token: string;
-  listNumber: number;
-}
+import { Wrapper } from './list.styles';
+import { ListProps, Movie } from './types';
 
 const List: React.FC<ListProps> = ({ token, listNumber }) => {
   const [movies, setMovies] = useState<Movie[]>([]);
@@ -26,32 +14,7 @@ const List: React.FC<ListProps> = ({ token, listNumber }) => {
 
   useEffect(() => {
     setIsLoading(true);
-    const getList = () => {
-      const url = 'https://thebetter.bsgroup.eu/Media/GetMediaList';
-      const headers = {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`,
-      };
-      const body = {
-        MediaListId: listNumber,
-        IncludeCategories: false,
-        IncludeImages: true,
-        IncludeMedia: false,
-        PageNumber: 1,
-        PageSize: 10,
-      };
-      axios
-        .post(url, body, { headers })
-        .then((response) => {
-          setMovies(response.data.Entities);
-        })
-        .catch((error) => {
-          setIsError(error.message);
-        });
-      setIsLoading(false);
-    };
-
-    getList();
+    getList(token, listNumber, setMovies, setIsError, setIsLoading);
   }, [token, listNumber]);
 
   return (

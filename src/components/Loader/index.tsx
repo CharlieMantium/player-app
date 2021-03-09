@@ -1,14 +1,7 @@
 import React from 'react';
-import styled from 'styled-components/macro';
 import Loader from 'react-loader-spinner';
-import { rem } from 'polished';
 
-const LoaderWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  padding: ${rem(100)} 0 0 0;
-  width: 100%;
-`;
+import { LoaderWrapper } from './loader.styles';
 
 const LoaderComponent = () => {
   return (
