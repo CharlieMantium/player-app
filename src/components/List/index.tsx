@@ -3,6 +3,7 @@ import axios from 'axios';
 import styled from 'styled-components/macro';
 
 import ListItem from '../ListItem';
+import LoaderComponent from '../Loader';
 import Error from '../Error';
 
 const Wrapper = styled.div``;
@@ -20,12 +21,12 @@ interface ListProps {
 
 const List: React.FC<ListProps> = ({ token, listNumber }) => {
   const [movies, setMovies] = useState<Movie[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
 
   useEffect(() => {
+    setIsLoading(true);
     const getList = () => {
-      setIsLoading(true);
       const url = 'https://thebetter.bsgroup.eu/Media/GetMediaList';
       const headers = {
         'Content-Type': 'application/json',
@@ -49,6 +50,7 @@ const List: React.FC<ListProps> = ({ token, listNumber }) => {
         });
       setIsLoading(false);
     };
+
     getList();
   }, [token, listNumber]);
 
@@ -56,7 +58,7 @@ const List: React.FC<ListProps> = ({ token, listNumber }) => {
     <Wrapper>
       {isError && <Error />}
       {isLoading ? (
-        <p>Loading...</p>
+        <LoaderComponent />
       ) : (
         movies.map((movie: Movie) => (
           <ListItem
