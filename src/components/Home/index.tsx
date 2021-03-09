@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components/macro';
 
-const Wrapper = styled.div``;
+import List from '../List';
 
-const List = styled.div``;
+const Wrapper = styled.div``;
 
 interface HomeProps {
   token: string;
@@ -12,7 +12,7 @@ interface HomeProps {
 const Home: React.FC<HomeProps> = ({ token }) => {
   return (
     <Wrapper>
-      <List />
+      <List token={token} />
     </Wrapper>
   );
 };

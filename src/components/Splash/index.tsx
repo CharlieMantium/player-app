@@ -29,17 +29,24 @@ interface SplashProps {
 
 const Splash: React.FC<SplashProps> = ({ setToken }) => {
   const [isLoggingIn, setIsLoggingIn] = useState(false);
-  useEffect(() => {
-    if (isLoggingIn) {
-      axios.post('https://thebetter.bsgroup.eu/Authorization/SignIn', {}).then((response) => {
-        setToken(response.data.AuthorizationToken.Token);
-      });
-    }
-  }, [isLoggingIn, setToken]);
+  const [isError, setIsError] = useState(false);
 
   const handleButtonClick = () => {
     setIsLoggingIn(true);
   };
+
+  useEffect(() => {
+    if (isLoggingIn) {
+      axios
+        .post('https://thebetter.bsgroup.eu/Authorization/SignIn', {})
+        .then((response) => {
+          setToken(response.data.AuthorizationToken.Token);
+        })
+        .catch((error) => {
+          setIsError(error.message);
+        });
+    }
+  }, [isLoggingIn, setToken]);
 
   return (
     <Wrapper>
