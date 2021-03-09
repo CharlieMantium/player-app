@@ -1,7 +1,7 @@
 import styled from 'styled-components/macro';
 import { rem } from 'polished';
 
-import { colors } from '../../styles/base';
+import { colors, effects } from '../../styles/base';
 
 export const Wrapper = styled.div`
   display: flex;
@@ -16,7 +16,11 @@ export const Wrapper = styled.div`
   }
 `;
 
-export const Logo = styled.h1``;
+export const Logo = styled.h1`
+  color: ${colors.delta};
+  text-shadow: ${effects.outline(colors.beta, '2px')};
+  font-size: 3rem;
+`;
 
 export const Button = styled.button`
   padding: ${rem(10)} ${rem(50)};

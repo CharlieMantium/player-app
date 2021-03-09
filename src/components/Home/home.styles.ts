@@ -1,7 +1,7 @@
 import styled from 'styled-components/macro';
 import { rem } from 'polished';
 
-import { colors } from '../../styles/base';
+import { colors, effects } from '../../styles/base';
 
 export const Wrapper = styled.div`
   @media (min-width: 620px) {
@@ -9,7 +9,10 @@ export const Wrapper = styled.div`
   }
 `;
 
-export const Header = styled.h1``;
+export const Header = styled.h1`
+  color: ${colors.delta};
+  text-shadow: ${effects.outline(colors.beta, '2px')};
+`;
 
 export const ListChangeWrapper = styled.div`
   display: flex;

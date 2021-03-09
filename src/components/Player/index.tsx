@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import ReactPlayer from 'react-player';
 
 import { getMovie } from '../../helpers';
 import { Wrapper } from './player.styles';
