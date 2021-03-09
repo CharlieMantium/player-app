@@ -36,16 +36,18 @@ const Splash: React.FC<SplashProps> = ({ setToken, setIsError }) => {
   };
 
   useEffect(() => {
-    if (isLoggingIn) {
+    const login = () => {
       axios
         .post('https://thebetter.bsgroup.eu/Authorization/SignIn', {})
         .then((response) => {
-          console.log(response);
           setToken(response.data.AuthorizationToken.Token);
         })
         .catch((error) => {
           setIsError(error.message);
         });
+    };
+    if (isLoggingIn) {
+      login();
     }
   }, [isLoggingIn, setToken, setIsError]);
 

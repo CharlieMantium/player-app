@@ -18,26 +18,29 @@ const Player: React.FC<PlayerProps> = ({ id, token }) => {
   const [isError, setIsError] = useState(false);
 
   useEffect(() => {
-    const url = 'https://thebetter.bsgroup.eu/Media/GetMediaPlayInfo';
-    const headers = {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`,
+    const getMovie = () => {
+      const url = 'https://thebetter.bsgroup.eu/Media/GetMediaPlayInfo';
+      const headers = {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      };
+      const body = {
+        MediaId: 15,
+      };
+      axios
+        .post(url, body, { headers })
+        .then((response) => {
+          // console.log(response);
+          setMovieUrl(response);
+        })
+        .catch((error) => {
+          setIsError(error.message);
+        });
     };
-    const body = {
-      MediaId: 15,
-    };
-    axios
-      .post(url, body, { headers })
-      .then((response) => {
-        console.log(response);
-        setMovieUrl(response);
-      })
-      .catch((error) => {
-        setIsError(error.message);
-      });
+    getMovie();
   }, [token]);
 
-  console.log(token);
+  // console.log(token);
 
   return <Wrapper>{/* <ReactPlayer url={movieUrl} /> */}</Wrapper>;
 };

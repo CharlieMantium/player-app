@@ -15,49 +15,59 @@ interface Movie {
 
 interface ListProps {
   token: string;
+  listNumber: number;
 }
 
-const List: React.FC<ListProps> = ({ token }) => {
+const List: React.FC<ListProps> = ({ token, listNumber }) => {
   const [movies, setMovies] = useState<Movie[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
 
   useEffect(() => {
-    const url = 'https://thebetter.bsgroup.eu/Media/GetMediaList';
-    const headers = {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`,
+    const getList = () => {
+      setIsLoading(true);
+      const url = 'https://thebetter.bsgroup.eu/Media/GetMediaList';
+      const headers = {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      };
+      const body = {
+        MediaListId: listNumber,
+        IncludeCategories: false,
+        IncludeImages: true,
+        IncludeMedia: false,
+        PageNumber: 1,
+        PageSize: 10,
+      };
+      axios
+        .post(url, body, { headers })
+        .then((response) => {
+          setMovies(response.data.Entities);
+        })
+        .catch((error) => {
+          setIsError(error.message);
+        });
+      setIsLoading(false);
     };
-    const body = {
-      MediaListId: 2,
-      IncludeCategories: false,
-      IncludeImages: true,
-      IncludeMedia: false,
-      PageNumber: 1,
-      PageSize: 10,
-    };
-    axios
-      .post(url, body, { headers })
-      .then((response) => {
-        setMovies(response.data.Entities);
-      })
-      .catch((error) => {
-        setIsError(error.message);
-      });
-  }, [token]);
+    getList();
+  }, [token, listNumber]);
 
   return (
     <Wrapper>
       {isError && <Error />}
-      {movies &&
+      {isLoading ? (
+        <p>Loading...</p>
+      ) : (
         movies.map((movie: Movie) => (
           <ListItem
             key={movie.Id}
             id={movie.Id}
             title={movie.Title}
-            image={movie.Images.filter((image) => image.ImageTypeCode === 'FRAME')[0].Url}
+            image={movie.Images.filter((image) => image.ImageTypeCode === 'FRAME')[0]?.Url}
             token={token}
           />
-        ))}
+        ))
+      )}
     </Wrapper>
   );
 };
