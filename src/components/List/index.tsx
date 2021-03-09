@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import styled from 'styled-components/macro';
 
+import Error from '../Error';
+
 const Wrapper = styled.div``;
 
 const ListItem = styled.div``;
@@ -45,6 +47,7 @@ const List: React.FC<ListProps> = ({ token }) => {
 
   return (
     <Wrapper>
+      {isError && <Error />}
       {movies && movies.map((movie: Movie) => <ListItem key={movie.Id}>{movie.Title}</ListItem>)}
     </Wrapper>
   );

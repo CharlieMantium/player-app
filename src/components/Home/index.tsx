@@ -5,6 +5,8 @@ import List from '../List';
 
 const Wrapper = styled.div``;
 
+const Header = styled.h1``;
+
 interface HomeProps {
   token: string;
 }
@@ -12,6 +14,7 @@ interface HomeProps {
 const Home: React.FC<HomeProps> = ({ token }) => {
   return (
     <Wrapper>
+      <Header>PlayerApp</Header>
       <List token={token} />
     </Wrapper>
   );

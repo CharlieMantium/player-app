@@ -6,12 +6,12 @@ import { rem } from 'polished';
 import { colors } from '../../styles/base';
 
 const Wrapper = styled.div`
-  padding: ${rem(240)} ${rem(20)} ${rem(80)};
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
   flex: 1;
+  padding: 0 0 ${rem(20)} 0;
 `;
 
 const Logo = styled.h1``;
@@ -25,11 +25,11 @@ const Button = styled.button`
 
 interface SplashProps {
   setToken: (token: string) => void;
+  setIsError: (isError: boolean) => void;
 }
 
-const Splash: React.FC<SplashProps> = ({ setToken }) => {
+const Splash: React.FC<SplashProps> = ({ setToken, setIsError }) => {
   const [isLoggingIn, setIsLoggingIn] = useState(false);
-  const [isError, setIsError] = useState(false);
 
   const handleButtonClick = () => {
     setIsLoggingIn(true);
@@ -46,7 +46,7 @@ const Splash: React.FC<SplashProps> = ({ setToken }) => {
           setIsError(error.message);
         });
     }
-  }, [isLoggingIn, setToken]);
+  }, [isLoggingIn, setToken, setIsError]);
 
   return (
     <Wrapper>
