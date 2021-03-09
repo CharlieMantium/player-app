@@ -40,6 +40,7 @@ const Splash: React.FC<SplashProps> = ({ setToken, setIsError }) => {
       axios
         .post('https://thebetter.bsgroup.eu/Authorization/SignIn', {})
         .then((response) => {
+          console.log(response);
           setToken(response.data.AuthorizationToken.Token);
         })
         .catch((error) => {

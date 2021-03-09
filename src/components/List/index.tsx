@@ -25,7 +25,7 @@ const List: React.FC<ListProps> = ({ token }) => {
     const url = 'https://thebetter.bsgroup.eu/Media/GetMediaList';
     const headers = {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`,
+      'Authorization': `Bearer ${token}`,
     };
     const body = {
       MediaListId: 2,
@@ -52,8 +52,10 @@ const List: React.FC<ListProps> = ({ token }) => {
         movies.map((movie: Movie) => (
           <ListItem
             key={movie.Id}
+            id={movie.Id}
             title={movie.Title}
             image={movie.Images.filter((image) => image.ImageTypeCode === 'FRAME')[0].Url}
+            token={token}
           />
         ))}
     </Wrapper>

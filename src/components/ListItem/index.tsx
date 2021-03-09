@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components/macro';
 import { rem } from 'polished';
 
 import { colors } from '../../styles/base';
+
+import Player from '../Player';
 
 const Wrapper = styled.div`
   position: relative;
@@ -22,20 +24,33 @@ const Title = styled.h3`
   background-color: ${colors.alpha};
 `;
 
+const Button = styled.button``;
+
 const Image = styled.img`
   width: 100%;
 `;
 
 interface ListItemProps {
   title: string;
+  id: string;
   image: string;
+  token: string;
 }
 
-const ListItem: React.FC<ListItemProps> = ({ title, image }) => {
+const ListItem: React.FC<ListItemProps> = ({ title, image, id, token }) => {
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  const handleButtonClick = () => {
+    setIsPlaying(true);
+  };
+
   return (
     <Wrapper>
       <Title>{title}</Title>
-      <Image src={image} alt={`${title} movie cover`} />
+      <Button onClick={handleButtonClick}>
+        <Image src={image} alt={`${title} movie cover`} />
+      </Button>
+      {isPlaying && <Player id={id} token={token} />}
     </Wrapper>
   );
 };
