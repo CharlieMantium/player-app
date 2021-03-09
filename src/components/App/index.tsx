@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components/macro';
 
 import Splash from '../Splash';
@@ -10,9 +10,11 @@ const Wrapper = styled.div`
 `;
 
 const App = () => {
+  const [token, setToken] = useState('');
+
   return (
     <Wrapper>
-      <Splash />
+      <Splash setToken={setToken} />
     </Wrapper>
   );
 };

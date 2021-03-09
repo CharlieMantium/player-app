@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components/macro';
+import axios from 'axios';
 import { rem } from 'polished';
 
 import { colors } from '../../styles/base';
@@ -22,11 +23,30 @@ const Button = styled.button`
   background-color: ${colors.beta};
 `;
 
-const Splash = () => (
-  <Wrapper>
-    <Logo>PlayerApp</Logo>
-    <Button>LOGIN</Button>
-  </Wrapper>
-);
+interface SplashProps {
+  setToken: (token: string) => void;
+}
+
+const Splash: React.FC<SplashProps> = ({ setToken }) => {
+  const [isLoggingIn, setIsLoggingIn] = useState(false);
+  useEffect(() => {
+    if (isLoggingIn) {
+      axios.post('https://thebetter.bsgroup.eu/Authorization/SignIn', {}).then((response) => {
+        setToken(response.data.AuthorizationToken.Token);
+      });
+    }
+  }, [isLoggingIn, setToken]);
+
+  const handleButtonClick = () => {
+    setIsLoggingIn(true);
+  };
+
+  return (
+    <Wrapper>
+      <Logo>PlayerApp</Logo>
+      <Button onClick={handleButtonClick}>LOGIN</Button>
+    </Wrapper>
+  );
+};
 
 export default Splash;
