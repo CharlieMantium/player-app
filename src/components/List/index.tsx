@@ -2,15 +2,15 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import styled from 'styled-components/macro';
 
+import ListItem from '../ListItem';
 import Error from '../Error';
 
 const Wrapper = styled.div``;
 
-const ListItem = styled.div``;
-
 interface Movie {
   Title: string;
   Id: string;
+  Images: { ImageTypeCode: string; Url: string }[];
 }
 
 interface ListProps {
@@ -48,7 +48,14 @@ const List: React.FC<ListProps> = ({ token }) => {
   return (
     <Wrapper>
       {isError && <Error />}
-      {movies && movies.map((movie: Movie) => <ListItem key={movie.Id}>{movie.Title}</ListItem>)}
+      {movies &&
+        movies.map((movie: Movie) => (
+          <ListItem
+            key={movie.Id}
+            title={movie.Title}
+            image={movie.Images.filter((image) => image.ImageTypeCode === 'FRAME')[0].Url}
+          />
+        ))}
     </Wrapper>
   );
 };
