@@ -1,9 +1,9 @@
 export const colors = {
-  alpha: '#E75C3D',
-  beta: '#FAB143',
-  gamma: '#E8D263',
-  delta: '#6AA585',
-  epsilon: '#2E7C78',
+  alpha: '#0ead69',
+  beta: '#ffd23f',
+  gamma: '#ee4266',
+  delta: '#3bceac',
+  epsilon: '#540d6e',
 };
 
 export const effects = {

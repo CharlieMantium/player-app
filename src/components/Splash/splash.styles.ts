@@ -18,7 +18,7 @@ export const Wrapper = styled.div`
 
 export const Logo = styled.h1`
   color: ${colors.delta};
-  text-shadow: ${effects.outline(colors.beta, '2px')};
+  text-shadow: ${effects.outline('#000000', '2px')};
   font-size: 3rem;
 `;
 
@@ -27,4 +27,5 @@ export const Button = styled.button`
   border: ${rem(3)} solid ${colors.alpha};
   border-radius: ${rem(5)};
   background-color: ${colors.beta};
+  cursor: pointer;
 `;

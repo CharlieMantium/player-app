@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import ReactPlayer from 'react-player';
 
+import { useToken } from '../../store';
 import { getMovie } from '../../helpers';
 import { Wrapper } from './player.styles';
 import { PlayerProps } from './types';
 
-const Player: React.FC<PlayerProps> = ({ id, token }) => {
+const Player: React.FC<PlayerProps> = ({ id }) => {
+  const [{ token }] = useToken();
   const [movieUrl, setMovieUrl] = useState({});
   const [isError, setIsError] = useState(false);
 

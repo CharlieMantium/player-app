@@ -11,7 +11,7 @@ export const Wrapper = styled.div`
 
 export const Header = styled.h1`
   color: ${colors.delta};
-  text-shadow: ${effects.outline(colors.beta, '2px')};
+  text-shadow: ${effects.outline('#000000', '2px')};
 `;
 
 export const ListChangeWrapper = styled.div`

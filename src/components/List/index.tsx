@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
+import { useToken } from '../../store';
 import { getList } from '../../helpers/index';
 import ListItem from '../ListItem';
 import LoaderComponent from '../Loader';
@@ -7,7 +8,8 @@ import Error from '../Error';
 import { Wrapper } from './list.styles';
 import { ListProps, Movie } from './types';
 
-const List: React.FC<ListProps> = ({ token, listNumber }) => {
+const List: React.FC<ListProps> = ({ listNumber }) => {
+  const [{ token }] = useToken();
   const [movies, setMovies] = useState<Movie[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
@@ -29,7 +31,6 @@ const List: React.FC<ListProps> = ({ token, listNumber }) => {
             id={movie.Id}
             title={movie.Title}
             image={movie.Images.filter((image) => image.ImageTypeCode === 'FRAME')[0]?.Url}
-            token={token}
           />
         ))
       )}

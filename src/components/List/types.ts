@@ -5,6 +5,5 @@ export interface Movie {
 }
 
 export interface ListProps {
-  token: string;
   listNumber: number;
 }

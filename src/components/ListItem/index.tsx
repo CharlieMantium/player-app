@@ -4,7 +4,7 @@ import Player from '../Player';
 import { Wrapper, Title, Button, Image, NoImage } from './listItem.styles';
 import { ListItemProps } from './types';
 
-const ListItem: React.FC<ListItemProps> = ({ title, image, id, token }) => {
+const ListItem: React.FC<ListItemProps> = ({ title, image, id }) => {
   const [isPlaying, setIsPlaying] = useState(false);
 
   const handleButtonClick = () => {
@@ -21,7 +21,7 @@ const ListItem: React.FC<ListItemProps> = ({ title, image, id, token }) => {
           <NoImage>Oops! No image</NoImage>
         )}
       </Button>
-      {isPlaying && <Player id={id} token={token} />}
+      {isPlaying && <Player id={id} />}
     </Wrapper>
   );
 };

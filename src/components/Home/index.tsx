@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 
 import List from '../List';
 import { Wrapper, Header, ListChangeWrapper, Button } from './home.styles';
-import { HomeProps } from './types';
 
-const Home: React.FC<HomeProps> = ({ token }) => {
+const Home = () => {
   const [listNumber, setListNumber] = useState(2);
 
   const handlePreviousListClick = () => {
@@ -22,7 +21,7 @@ const Home: React.FC<HomeProps> = ({ token }) => {
         <Button onClick={handlePreviousListClick}>Previous List</Button>
         <Button onClick={handleNextListClick}>Next List</Button>
       </ListChangeWrapper>
-      <List token={token} listNumber={listNumber} />
+      <List listNumber={listNumber} />
     </Wrapper>
   );
 };
