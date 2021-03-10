@@ -11,7 +11,7 @@ export const Wrapper = styled.div`
   width: 100%;
 
   @media (min-width: 620px) {
-    width: 50%;
+    width: 30%;
   }
 `;
 
@@ -52,7 +52,6 @@ export const NoImage = styled.div`
   border-radius: ${rem(10)};
 
   @media (min-width: 620px) {
-    min-height: ${rem(200)};
     height: 100%;
   }
 `;
